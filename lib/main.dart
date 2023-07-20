@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
         '/advertisementDetails': (context) => AdvertisementDetailsPage(),
         '/newsDetails': (context) => NewsDetailsPage(),
         '/settings': (context) => SettingsPage(),
+        '/login': (context) => LoginPage(),
+        '/change_password': (context) => ChangePasswordPage(),
+        '/edit_profile': (context) => EditProfilePage(),
       },
     );
   }
@@ -32,7 +35,7 @@ class HomePage extends StatelessWidget {
         title: Text('Home Page'),
       ),
       body: GridView.count(
-        crossAxisCount: 2, 
+        crossAxisCount: 2,
         padding: EdgeInsets.all(16.0),
         children: [
           InkWell(
@@ -40,13 +43,12 @@ class HomePage extends StatelessWidget {
               Navigator.pushNamed(context, '/userDetails');
             },
             child: Container(
-              width: 150, 
-              height: 150, 
+              width: 150,
+              height: 150,
               decoration: BoxDecoration(
-                color: Colors
-                    .white,
-                borderRadius: BorderRadius.circular(
-                    10.0),                 boxShadow: [
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
                     spreadRadius: 2,
@@ -80,13 +82,11 @@ class HomePage extends StatelessWidget {
               Navigator.pushNamed(context, '/futsalDetails');
             },
             child: Container(
-              width: 150, 
-              height: 150, 
+              width: 150,
+              height: 150,
               decoration: BoxDecoration(
-                color: Colors
-                    .white, 
-                borderRadius: BorderRadius.circular(
-                    10.0), 
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -121,13 +121,11 @@ class HomePage extends StatelessWidget {
               Navigator.pushNamed(context, '/advertisementDetails');
             },
             child: Container(
-              width: 150, 
-              height: 150, 
+              width: 150,
+              height: 150,
               decoration: BoxDecoration(
-                color: Colors
-                    .white, 
-                borderRadius: BorderRadius.circular(
-                    10.0), 
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -162,13 +160,11 @@ class HomePage extends StatelessWidget {
               Navigator.pushNamed(context, '/newsDetails');
             },
             child: Container(
-              width: 150, 
-              height: 150, 
+              width: 150,
+              height: 150,
               decoration: BoxDecoration(
-                color: Colors
-                    .white, 
-                borderRadius: BorderRadius.circular(
-                    10.0), 
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -312,8 +308,7 @@ class AddUserPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     child: Text("Submit"),
                   ),
                   SizedBox(width: 8),
@@ -430,11 +425,9 @@ class FutsalDetailsPage extends StatelessWidget {
             futsalName: futsalName,
             futsalDetails: futsalDetails,
             onEdit: () {
-             
               print('Edit Futsal: $futsalName');
             },
             onDelete: () {
-              
               print('Delete Futsal: $futsalName');
             },
           );
@@ -468,8 +461,7 @@ class AddFutsalPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 child: Text('Upload Image'),
               ),
               SizedBox(height: 16),
@@ -477,8 +469,7 @@ class AddFutsalPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
@@ -593,11 +584,9 @@ class AdvertisementDetailsPage extends StatelessWidget {
             adTitle: adTitle,
             adDetails: adDetails,
             onEdit: () {
-              
               print('Edit Advertisement: $adTitle');
             },
             onDelete: () {
-              
               print('Delete Advertisement: $adTitle');
             },
           );
@@ -631,9 +620,7 @@ class AddAdvertisementPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 child: Text('Upload Image'),
               ),
               SizedBox(height: 16),
@@ -641,9 +628,7 @@ class AddAdvertisementPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                     
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
@@ -758,7 +743,6 @@ class NewsDetailsPage extends StatelessWidget {
             newsTitle: newsTitle,
             newsDetails: newsDetails,
             onEdit: () {
-               
               print('Edit News: $newsTitle');
             },
             onDelete: () {
@@ -795,8 +779,7 @@ class AddNewsPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 child: Text('Upload Image'),
               ),
               SizedBox(height: 16),
@@ -804,8 +787,7 @@ class AddNewsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
@@ -893,7 +875,31 @@ class NewsCard extends StatelessWidget {
   }
 }
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  int _selectedIndex = 1; // Initially set to 1 for "Settings"
+
+  void _onItemTapped(int index) {
+    if (index != _selectedIndex) {
+      if (index == 0) {
+        Navigator.pushReplacementNamed(context, '/'); // Navigate to Home
+      } else if (index == 1) {
+        // Stay on Settings
+      }
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
+
+  void _navigateToEditProfilePage(BuildContext context) {
+    Navigator.of(context).pushNamed('/edit_profile');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -928,7 +934,7 @@ class SettingsPage extends StatelessWidget {
             ),
             SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => _navigateToEditProfilePage(context),
               child: Text('Edit Profile'),
             ),
             SizedBox(height: 20),
@@ -938,7 +944,9 @@ class SettingsPage extends StatelessWidget {
                   OptionCard(
                     icon: Icons.vpn_key,
                     title: 'Change Password',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/change_password');
+                    },
                   ),
                   OptionCard(
                     icon: Icons.delete,
@@ -990,21 +998,20 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home,
+                color: _selectedIndex == 0 ? Colors.green : null),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings,
+                color: _selectedIndex == 1 ? Colors.green : null),
             label: 'Settings',
           ),
         ],
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.pop(context);
-          }
-        },
+        onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
       ),
     );
   }
@@ -1015,7 +1022,11 @@ class OptionCard extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
-  OptionCard({required this.icon, required this.title, required this.onTap});
+  OptionCard({
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1025,6 +1036,148 @@ class OptionCard extends StatelessWidget {
         leading: Icon(icon),
         title: Text(title),
         onTap: onTap,
+      ),
+    );
+  }
+}
+
+class EditProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Profile'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(labelText: "Full Name"),
+            ),
+            SizedBox(height: 16),
+            TextFormField(
+              decoration: InputDecoration(labelText: "Username"),
+            ),
+            SizedBox(height: 16),
+            TextFormField(
+              decoration: InputDecoration(labelText: "Email Address"),
+            ),
+            SizedBox(height: 16),
+            TextFormField(
+              decoration: InputDecoration(labelText: "Phone Number"),
+            ),
+            SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Implement your submit logic here
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Text("Submit"),
+                ),
+                SizedBox(width: 8),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: TextButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  child: Text("Cancel"),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ChangePasswordPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Change Password'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(labelText: "Current Password"),
+              obscureText: true,
+            ),
+            SizedBox(height: 16),
+            TextFormField(
+              decoration: InputDecoration(labelText: "New Password"),
+              obscureText: true,
+            ),
+            SizedBox(height: 16),
+            TextFormField(
+              decoration: InputDecoration(labelText: "Re-enter New Password"),
+              obscureText: true,
+            ),
+            SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Implement your submit logic here
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Text("Submit"),
+                ),
+                SizedBox(width: 8),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: TextButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  child: Text("Cancel"),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class LoginPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Login'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/settings');
+          },
+          child: Text('Login'),
+        ),
       ),
     );
   }
