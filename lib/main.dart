@@ -121,18 +121,82 @@ class HomePage extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, '/advertisementDetails');
             },
-            child: HomeCard(
-              icon: Icons.shopping_bag,
-              title: 'Advertisement Card',
+            child: Container(
+              width: 150, // Set a width for the card, adjust as needed
+              height: 150, // Set a height for the card, adjust as needed
+              decoration: BoxDecoration(
+                color: Colors
+                    .white, // You can set the background color of the card here
+                borderRadius: BorderRadius.circular(
+                    10.0), // Adjust the border radius as needed
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.shopping_bag,
+                    color: Colors.green, //
+                    size: 50,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Advertisement Management',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           InkWell(
             onTap: () {
               Navigator.pushNamed(context, '/newsDetails');
             },
-            child: HomeCard(
-              icon: Icons.article,
-              title: 'News Card',
+            child: Container(
+              width: 150, // Set a width for the card, adjust as needed
+              height: 150, // Set a height for the card, adjust as needed
+              decoration: BoxDecoration(
+                color: Colors
+                    .white, // You can set the background color of the card here
+                borderRadius: BorderRadius.circular(
+                    10.0), // Adjust the border radius as needed
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.article,
+                    color: Colors.green, //
+                    size: 50,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'News Management',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
