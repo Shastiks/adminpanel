@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
         title: Text('Home Page'),
       ),
       body: GridView.count(
-        crossAxisCount: 2, // Display 2 cards in a row
+        crossAxisCount: 2, 
         padding: EdgeInsets.all(16.0),
         children: [
           InkWell(
@@ -40,14 +40,13 @@ class HomePage extends StatelessWidget {
               Navigator.pushNamed(context, '/userDetails');
             },
             child: Container(
-              width: 150, // Set a width for the card, adjust as needed
-              height: 150, // Set a height for the card, adjust as needed
+              width: 150, 
+              height: 150, 
               decoration: BoxDecoration(
                 color: Colors
-                    .white, // You can set the background color of the card here
+                    .white,
                 borderRadius: BorderRadius.circular(
-                    10.0), // Adjust the border radius as needed
-                boxShadow: [
+                    10.0),                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
                     spreadRadius: 2,
@@ -81,13 +80,13 @@ class HomePage extends StatelessWidget {
               Navigator.pushNamed(context, '/futsalDetails');
             },
             child: Container(
-              width: 150, // Set a width for the card, adjust as needed
-              height: 150, // Set a height for the card, adjust as needed
+              width: 150, 
+              height: 150, 
               decoration: BoxDecoration(
                 color: Colors
-                    .white, // You can set the background color of the card here
+                    .white, 
                 borderRadius: BorderRadius.circular(
-                    10.0), // Adjust the border radius as needed
+                    10.0), 
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -122,13 +121,13 @@ class HomePage extends StatelessWidget {
               Navigator.pushNamed(context, '/advertisementDetails');
             },
             child: Container(
-              width: 150, // Set a width for the card, adjust as needed
-              height: 150, // Set a height for the card, adjust as needed
+              width: 150, 
+              height: 150, 
               decoration: BoxDecoration(
                 color: Colors
-                    .white, // You can set the background color of the card here
+                    .white, 
                 borderRadius: BorderRadius.circular(
-                    10.0), // Adjust the border radius as needed
+                    10.0), 
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -148,7 +147,7 @@ class HomePage extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Advertisement Management',
+                    'Add Management',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -163,13 +162,13 @@ class HomePage extends StatelessWidget {
               Navigator.pushNamed(context, '/newsDetails');
             },
             child: Container(
-              width: 150, // Set a width for the card, adjust as needed
-              height: 150, // Set a height for the card, adjust as needed
+              width: 150, 
+              height: 150, 
               decoration: BoxDecoration(
                 color: Colors
-                    .white, // You can set the background color of the card here
+                    .white, 
                 borderRadius: BorderRadius.circular(
-                    10.0), // Adjust the border radius as needed
+                    10.0), 
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -243,57 +242,22 @@ class HomeCard extends StatelessWidget {
 }
 
 class UserDetailsPage extends StatelessWidget {
+  void _navigateToAddUserPage(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => AddUserPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _showAddUserPopup() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Add User"),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Name"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Username"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Password"),
-                    obscureText: true,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Confirm Password"),
-                    obscureText: true,
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Cancel"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Submit"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text('User Details'),
+        actions: [
+          IconButton(
+            onPressed: () => _navigateToAddUserPage(context),
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: 10,
@@ -303,14 +267,67 @@ class UserDetailsPage extends StatelessWidget {
           return UserCard(
             username: username,
             userDetails: userDetails,
-            onEdit: () {},
-            onDelete: () {},
+            onEdit: () {
+              print('Edit User: $username');
+            },
+            onDelete: () {
+              print('Delete User: $username');
+            },
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddUserPopup,
-        child: Icon(Icons.add),
+    );
+  }
+}
+
+class AddUserPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add User'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: "Name"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Username"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Password"),
+                obscureText: true,
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Confirm Password"),
+                obscureText: true,
+              ),
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                    },
+                    child: Text("Submit"),
+                  ),
+                  SizedBox(width: 8),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Cancel"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -348,19 +365,33 @@ class UserCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                ElevatedButton(
                   onPressed: onEdit,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  ),
                   child: Text(
                     'Edit',
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(fontSize: 12, color: Colors.white),
                   ),
                 ),
                 SizedBox(width: 8),
-                TextButton(
+                ElevatedButton(
                   onPressed: onDelete,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  ),
                   child: Text(
                     'Delete',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(fontSize: 12, color: Colors.white),
                   ),
                 ),
               ],
@@ -373,52 +404,22 @@ class UserCard extends StatelessWidget {
 }
 
 class FutsalDetailsPage extends StatelessWidget {
+  void _navigateToAddFutsalPage(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => AddFutsalPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _showAddFutsalPopup() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Add Futsal"),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Futsal Name"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Location"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Description"),
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Cancel"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Submit"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Futsal Details'),
+        actions: [
+          IconButton(
+            onPressed: () => _navigateToAddFutsalPage(context),
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: 10,
@@ -428,14 +429,76 @@ class FutsalDetailsPage extends StatelessWidget {
           return FutsalCard(
             futsalName: futsalName,
             futsalDetails: futsalDetails,
-            onEdit: () {},
-            onDelete: () {},
+            onEdit: () {
+             
+              print('Edit Futsal: $futsalName');
+            },
+            onDelete: () {
+              
+              print('Delete Futsal: $futsalName');
+            },
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddFutsalPopup,
-        child: Icon(Icons.add),
+    );
+  }
+}
+
+class AddFutsalPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Venue'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: "Name"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Location"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Description"),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                },
+                child: Text('Upload Image'),
+              ),
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    child: Text("Submit"),
+                  ),
+                  SizedBox(width: 8),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Cancel"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -473,14 +536,26 @@ class FutsalCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                ElevatedButton(
                   onPressed: onEdit,
-                  child: Text('Edit'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Text('Edit', style: TextStyle(color: Colors.white)),
                 ),
                 SizedBox(width: 8),
-                TextButton(
+                ElevatedButton(
                   onPressed: onDelete,
-                  child: Text('Delete'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Text('Delete', style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
@@ -492,53 +567,22 @@ class FutsalCard extends StatelessWidget {
 }
 
 class AdvertisementDetailsPage extends StatelessWidget {
+  void _navigateToAddAdvertisementPage(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => AddAdvertisementPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _showAddAdvertisementPopup() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Add Advertisement"),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextFormField(
-                    decoration:
-                        InputDecoration(labelText: "Advertisement Title"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Published Date"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Description"),
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Cancel"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Submit"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Advertisement Details'),
+        actions: [
+          IconButton(
+            onPressed: () => _navigateToAddAdvertisementPage(context),
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: 10,
@@ -548,14 +592,78 @@ class AdvertisementDetailsPage extends StatelessWidget {
           return AdCard(
             adTitle: adTitle,
             adDetails: adDetails,
-            onEdit: () {},
-            onDelete: () {},
+            onEdit: () {
+              
+              print('Edit Advertisement: $adTitle');
+            },
+            onDelete: () {
+              
+              print('Delete Advertisement: $adTitle');
+            },
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddAdvertisementPopup,
-        child: Icon(Icons.add),
+    );
+  }
+}
+
+class AddAdvertisementPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Advertisements'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: "Name"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Brand"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Date Uploaded"),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  
+                },
+                child: Text('Upload Image'),
+              ),
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                     
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    child: Text("Submit"),
+                  ),
+                  SizedBox(width: 8),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Cancel"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -593,14 +701,26 @@ class AdCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                ElevatedButton(
                   onPressed: onEdit,
-                  child: Text('Edit'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Text('Edit', style: TextStyle(color: Colors.white)),
                 ),
                 SizedBox(width: 8),
-                TextButton(
+                ElevatedButton(
                   onPressed: onDelete,
-                  child: Text('Delete'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Text('Delete', style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
@@ -612,55 +732,22 @@ class AdCard extends StatelessWidget {
 }
 
 class NewsDetailsPage extends StatelessWidget {
+  void _navigateToAddNewsPage(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => AddNewsPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _showAddNewsPopup() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Add News"),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "News Title"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Published Date"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Location"),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: "Description"),
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Cancel"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Submit"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text('News Details'),
+        actions: [
+          IconButton(
+            onPressed: () => _navigateToAddNewsPage(context),
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: 10,
@@ -670,14 +757,75 @@ class NewsDetailsPage extends StatelessWidget {
           return NewsCard(
             newsTitle: newsTitle,
             newsDetails: newsDetails,
-            onEdit: () {},
-            onDelete: () {},
+            onEdit: () {
+               
+              print('Edit News: $newsTitle');
+            },
+            onDelete: () {
+              print('Delete News: $newsTitle');
+            },
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddNewsPopup,
-        child: Icon(Icons.add),
+    );
+  }
+}
+
+class AddNewsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add News'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: "Title"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Location"),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Date Uploaded"),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                },
+                child: Text('Upload Image'),
+              ),
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    child: Text("Submit"),
+                  ),
+                  SizedBox(width: 8),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Cancel"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -715,14 +863,26 @@ class NewsCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                ElevatedButton(
                   onPressed: onEdit,
-                  child: Text('Edit'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                  child: Text('Edit', style: TextStyle(color: Colors.white)),
                 ),
                 SizedBox(width: 8),
-                TextButton(
+                ElevatedButton(
                   onPressed: onDelete,
-                  child: Text('Delete'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                  child: Text('Delete', style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
@@ -820,7 +980,6 @@ class SettingsPage extends StatelessWidget {
                     icon: Icons.logout,
                     title: 'Logout',
                     onTap: () {
-                      // Handle Logout option
                       Navigator.pushReplacementNamed(context, '/login');
                     },
                   ),
